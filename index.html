@@ -15,7 +15,7 @@
             <nav class="hidden md:flex space-x-4">
                 <a href="#projects" class="hover:text-light-accent dark:hover:text-dark-accent">Projects</a>
                 <a href="#about" class="hover:text-light-accent dark:hover:text-dark-accent">About</a>
-                <a href="#contact" class="hover:text-light-accent dark:hover:text-dark-accent">Contact</a>
+                <a target="_blank" href="https://www.linkedin.com/in/wytsepunter/" class="hover:text-light-accent dark:hover:text-dark-accent">Contact</a>
             </nav>
             <button id="themeToggle" class="p-2 rounded-full bg-light-accent dark:bg-dark-accent">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,21 +40,21 @@
                 <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Wytse Punter</h2>
                 <p class="text-xl md:text-2xl mb-8 animate-fade-in animation-delay-600">Creating efficient, scalable solutions</p>
                 <div class="flex justify-center space-x-4">
-                    <a href="#projects" class="btn animate-fade-in animation-delay-900">View Projects</a>
-                    <a href="#contact" class="btn btn-primary animate-fade-in animation-delay-900">Hire Me</a>
+                    <a href="#projects" id="viewProjectsButton" class="btn animate-fade-in animation-delay-900">View Projects</a>
+                    <a target="_blank" href="https://www.linkedin.com/in/wytsepunter/" class="btn btn-primary animate-fade-in animation-delay-900">Hire Me</a>
                 </div>
             </div>
         </section>
         
         <section id="projects" class="py-16">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-8 text-center">My Projects</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center">Highlighted projects</h2>
                 <div class="projects-container">
                     <div class="project-card" data-project="1">
                         <img src="img/voyager.png" alt="Voyager Project" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2">Voyager</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">An innovative solution for modern problems.</p>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">A brave attempt to find market drivers using anomaly detection and gpt models.</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <img src="img/risk_of_ruin.png" alt="Risk Of Ruin Project" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2">Risk Of Ruin</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Revolutionizing the industry with cutting-edge technology.</p>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">A simple but crucial calculator.</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <img src="/img/cypher.png" alt="Cypher Project" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2">Cypher</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Transforming user experiences through intuitive design.</p>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">J. Powell Translator.</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <img src="/img/bi-frost.png" alt="Bi-Frost AI" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2">Bi-Frost AI</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Pushing the boundaries of quantum computing applications.</p>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">AI Personality Reporting.</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </div>
@@ -88,12 +88,15 @@
     </main>
 
     <div id="projectShowcase" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <h2 id="showcaseTitle" class="text-3xl font-bold mb-4"></h2>
-            <div id="showcaseTechStack" class="mb-4"></div>
-            <p id="showcaseStory" class="mb-4"></p>
-            <p id="showcaseLearnings" class="mb-4"></p>
-            <button id="closeShowcase" class="btn">Close</button>
+        <div class="p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <h2 id="showcaseTitle" class="text-3xl font-bold mb-6"></h2>
+            <div id="showcaseTechStack" class="mb-6 flex flex-wrap gap-2"></div>
+            <p id="showcaseStory" class="mb-6"></p>
+            <p id="showcaseLearnings" class="mb-6"></p>
+            <div class="flex justify-between items-center">
+                <a id="showcaseVisitButton" href="#" target="_blank" class="inline-block">Visit Website</a>
+                <button id="closeShowcase">Close</button>
+            </div>
         </div>
     </div>
 

@@ -8,67 +8,94 @@ document.addEventListener('DOMContentLoaded', () => {
         showcaseTechStack: document.getElementById('showcaseTechStack'),
         showcaseStory: document.getElementById('showcaseStory'),
         showcaseLearnings: document.getElementById('showcaseLearnings'),
+        showcaseVisitButton: document.getElementById('showcaseVisitButton'),
         closeShowcase: document.getElementById('closeShowcase'),
         heroTitle: document.querySelector('#hero h2'),
-        backgroundAnimation: document.querySelector('.background-animation')
+        backgroundAnimation: document.querySelector('.background-animation'),
+        projectsLinks: document.querySelectorAll('a[href="#projects"]'),
+        projectsSection: document.getElementById('projects'),
+        hireMeLinks: document.querySelectorAll('a[href="#hire-me"]'),
     };
 
     const projectDetails = {
         1: {
             title: "Voyager Dashboard",
-            techStack: ["Django", "Webscrapers", "PostgreSQL", "Bootstrap", "Highcharts.js"],
-            story: "I created this project to address the growing need for efficient data management in small businesses. The challenge was to design a user-friendly interface that could handle complex data operations.",
-            learnings: "Through this project, I deepened my understanding of full-stack development and learned the importance of user-centered design in creating effective business solutions."
+            techStack: [
+                "Python",
+                "Django",
+                "Web Scrapers",
+                "PostgreSQL",
+                "Bootstrap",
+                "Highcharts.js",
+                "Azure Functions",
+                "Contabo VPS",
+                "Linux",
+                "GPT 3.5",
+                "Relational Databases",
+                "Data Regulations",
+                "JavaScript",
+            ],
+            story: "After mastering web scraping, I tried using GPT-3.5 to link market moves to news articles. The AI always found a link, even when there wasn't one, so I switched to analyzing overall market sentiment. I developed advanced scraping techniques to gather data from various websites, successfully scraping every site I encountered.",
+            learnings: "As the project grew, I learned about designing larger systems to avoid slowing down. I explored different cloud platforms, starting with Azure, then a Contabo VPS for better resources at lower cost. However, unexpected data regulations made me switch to Heroku. This journey taught me about various hosting options and server configuration, while also improving my skills in building scalable systems.",
+            url: "https://voyager-terminal.com/"
         },
         2: {
-            title: "Risk Of Ruin Simulator",
-            techStack: ["HTML", "CSS", "JavaScript"],
-            story: "This project was born out of a desire to apply cutting-edge AI technology to solve real-world industry problems. I wanted to create a tool that could predict maintenance needs in manufacturing equipment.",
-            learnings: "I gained valuable experience in machine learning and data analysis. This project also taught me the importance of collaborating with domain experts to create truly impactful solutions."
+            title: "Risk of Ruin Simulator",
+            techStack: ["HTML", "CSS", "JavaScript", "Statistics", "Probability"],
+            story: "I created this tool because I couldn't find any risk of ruin simulators that allowed for floating point risks or rewards, which I needed. Since it could be built as a static website, I was able to develop it within a day without much hassle.",
+            learnings: "This project taught me that the top search results aren't always the best websites - they're often just the ones earning the most from ads or selling user data. It also showed me how quickly a useful tool can be built when keeping it simple and focused on solving a specific problem.",
+            url: "https://youngpake.github.io/risk_of_ruin/"
         },
         3: {
             title: "Cypher FOMC Tracker",
-            techStack: ["Django", "Webscrapers", "PostgreSQL", "FRED API", "Highcharts.js", "Selenium"],
-            story: "The goal of this project was to reimagine the user experience for a popular productivity app. I wanted to create an interface that was not only visually appealing but also highly intuitive and efficient.",
-            learnings: "This project significantly improved my UI/UX design skills and taught me the value of iterative design and user testing in creating successful digital products."
+            techStack: ["Python", "Django", "Webscrapers", "PostgreSQL", "FRED API", "Highcharts.js", "JavaScript", "Selenium", "GPT-4", "Relational Databases", "Data Regulations"],
+            story: "This project analyzes FOMC meeting transcripts from the Federal Reserve using GPT-4. It extracts key datasets and potential future actions based on specific conditions mentioned. For example, it might identify a statement like 'We'll cut interest rates next meeting if unemployment rises more than 1%'. The system then fetches relevant data (like unemployment stats), calculates year-over-year, month-over-month, and year-to-date statistics, and evaluates the conditions as true, false, or pending. It also highlights current economic bottlenecks and accelerators.",
+            learnings: "I discovered that interpreting Federal Reserve statements becomes more of an art than a science beyond a certain point. This was a significant realization in my learning journey. The project also improved my skills in natural language processing, data analysis, and integrating various APIs and technologies.",
+            url: "https://cypher-terminal.com/"
         },
         4: {
             title: "Bi-Frost AI",
-            techStack: ["Qiskit", "Python", "IBM Quantum Experience", "Machine Learning"],
-            story: "Quantum Leap was born from a fascination with the potential of quantum computing to solve complex problems. This project explores practical applications of quantum algorithms in various fields.",
-            learnings: "Through this project, I gained hands-on experience with quantum computing frameworks and deepened my understanding of quantum algorithms. It also taught me the importance of staying at the forefront of emerging technologies."
+            techStack: ["Python", "GPT", "Web Scraping", "Stripe API", "Data Regulations"],
+            story: "I created this project to explore how well GPT could analyze someone's entire online footprint and extract insights about their personality. The goal was to see if AI could form a comprehensive understanding of a person based on their digital presence. Development was smooth and enjoyable, making it a fun project to work on.",
+            learnings: "This project taught me how to integrate Stripe for payments, which was a key learning objective. I also gained insights into AI's capabilities for personality analysis and improved my skills in handling and processing large amounts of online data.",
+            url: "https://bi-frost.ai/"
         }
     };
-
     elements.projectCards.forEach(card => {
         card.addEventListener('click', () => {
-            const projectId = card.dataset.project;
-            showProjectDetails(projectId);
+            showProjectDetails(card.dataset.project);
         });
     });
 
+    function smoothScroll(target) {
+        target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
     function showProjectDetails(projectId) {
         const details = projectDetails[projectId];
-
+    
         elements.showcaseTitle.textContent = details.title;
-        elements.showcaseTechStack.innerHTML = details.techStack.map(tech => `<span class="tech-stack-label">${tech}</span>`).join('');
+        elements.showcaseTechStack.innerHTML = details.techStack.map(tech => 
+            `<span class="tech-stack-label">${tech}</span>`
+        ).join('');
         elements.showcaseStory.textContent = details.story;
         elements.showcaseLearnings.textContent = details.learnings;
-
+    
+        if (elements.showcaseVisitButton) {
+            elements.showcaseVisitButton.href = details.url;
+            elements.showcaseVisitButton.classList.remove('hidden');
+        }
+    
         elements.projectShowcase.classList.remove('hidden');
-        setTimeout(() => {
-            elements.projectShowcase.classList.add('active');
-            elements.projectShowcase.querySelector('div').classList.add('showcase-enter-active');
-        }, 10);
+        setTimeout(() => elements.projectShowcase.classList.add('active'), 10);
     }
 
     elements.closeShowcase.addEventListener('click', () => {
         elements.projectShowcase.classList.remove('active');
-        elements.projectShowcase.querySelector('div').classList.add('showcase-exit-active');
-        setTimeout(() => {
-            elements.projectShowcase.classList.add('hidden');
-            elements.projectShowcase.querySelector('div').classList.remove('showcase-enter-active', 'showcase-exit-active');
-        }, 300);
+        setTimeout(() => elements.projectShowcase.classList.add('hidden'), 300);
     });
 
     elements.themeToggle.addEventListener('click', () => {
@@ -76,16 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
     });
 
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('theme');
+    const isDarkMode = storedTheme === 'dark' || (storedTheme === null && prefersDarkMode);
+
+    if (isDarkMode) {
         document.documentElement.classList.add('dark');
     }
 
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            elements.backToTop.classList.remove('hidden');
-        } else {
-            elements.backToTop.classList.add('hidden');
-        }
+        elements.backToTop.classList.toggle('hidden', window.pageYOffset <= 300);
     });
 
     elements.backToTop.addEventListener('click', (e) => {
@@ -95,66 +122,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fadeInOnScroll() {
         elements.projectCards.forEach(card => {
-            const cardTop = card.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-
-            if (cardTop < windowHeight * 0.8) {
+            if (card.getBoundingClientRect().top < window.innerHeight * 0.8) {
                 card.classList.add('visible');
             }
         });
     }
 
-    const icons = ['code', 'database', 'server', 'cpu', 'hard-drive', 'terminal'];
-    for (let i = 0; i < 10; i++) {
-        createIcon();
-    }
-
     window.addEventListener('scroll', fadeInOnScroll);
     fadeInOnScroll();
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        });
-    });
 
     const heroText = elements.heroTitle.textContent;
     elements.heroTitle.textContent = '';
     elements.heroTitle.classList.add('typing-effect');
 
-    let charIndex = 0;
-    function typeWriter() {
-        if (charIndex < heroText.length) {
-            elements.heroTitle.textContent += heroText.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeWriter, 100);
+    (function typeWriter(index = 0) {
+        if (index < heroText.length) {
+            elements.heroTitle.textContent += heroText[index];
+            setTimeout(() => typeWriter(index + 1), 100);
         } else {
             elements.heroTitle.classList.remove('typing-effect');
         }
-    }
-    typeWriter();
+    })();
 
+    const icons = ['code', 'database', 'server', 'cpu', 'hard-drive', 'terminal'];
+    
     function createIcon() {
         const iconWrapper = document.createElement('div');
         iconWrapper.className = 'icon-wrapper';
-        iconWrapper.style.position = 'absolute';
-        iconWrapper.style.opacity = '0.2';
+        iconWrapper.style.cssText = `
+            position: absolute;
+            opacity: 0.2;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+        `;
 
         const icon = document.createElement('i');
         icon.dataset.feather = icons[Math.floor(Math.random() * icons.length)];
-        iconWrapper.appendChild(icon);
-
         const size = Math.random() * 30 + 20;
-        icon.style.width = `${size}px`;
-        icon.style.height = `${size}px`;
+        icon.style.cssText = `width: ${size}px; height: ${size}px;`;
 
-        iconWrapper.style.left = `${Math.random() * 100}%`;
-        iconWrapper.style.top = `${Math.random() * 100}%`;
-
+        iconWrapper.appendChild(icon);
         elements.backgroundAnimation.appendChild(iconWrapper);
         feather.replace();
 
@@ -174,6 +181,19 @@ document.addEventListener('DOMContentLoaded', () => {
             iterations: Infinity,
             direction: 'alternate',
             easing: 'ease-in-out'
+        });
+    }
+
+    for (let i = 0; i < 10; i++) {
+        createIcon();
+    }
+
+    if (elements.projectsLinks.length > 0 && elements.projectsSection) {
+        elements.projectsLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                smoothScroll(elements.projectsSection);
+            });
         });
     }
 });

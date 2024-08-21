@@ -14,10 +14,6 @@
     --dark-footer: #2a2a2a;
 }
 
-.dark, .light {
-    --bg-rgb: 240, 244, 248; /* Default to dark mode */
-}
-
 .light {
     --bg: var(--light-bg);
     --text: var(--light-text);
@@ -25,6 +21,7 @@
     --accent: var(--light-accent);
     --header: var(--light-header);
     --footer: var(--light-footer);
+    --bg-rgb: 240, 244, 248;
 }
 
 .dark {
@@ -40,12 +37,9 @@
 body, .btn, .project-card, #projectShowcase > div {
     background-color: var(--bg);
     color: var(--text);
-    transition: all 0.5s ease-in-out, background-color 0.3s, color 0.3s;
-    position: relative;
-    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Background animation styles */
 .background-animation {
     position: fixed;
     top: 0;
@@ -62,9 +56,7 @@ body, .btn, .project-card, #projectShowcase > div {
     opacity: 0.2;
 }
 
-.circle {
-    border-radius: 50%;
-}
+.circle { border-radius: 50%; }
 
 .triangle {
     width: 0;
@@ -93,7 +85,6 @@ body, .btn, .project-card, #projectShowcase > div {
     75% { transform: translate(-20px, -20px) rotate(5deg); }
 }
 
-/* Depth layer */
 .depth-layer {
     position: absolute;
     top: 0;
@@ -102,13 +93,6 @@ body, .btn, .project-card, #projectShowcase > div {
     height: 100%;
     background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
     pointer-events: none;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .shape {
-        transform: scale(0.7);
-    }
 }
 
 .projects-container {
@@ -122,12 +106,9 @@ body, .btn, .project-card, #projectShowcase > div {
     border: 1px solid var(--text-secondary);
     border-radius: 0.5rem;
     overflow: hidden;
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-    will-change: transform;
-    position: relative;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, opacity 0.5s ease-out;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .project-card.visible {
@@ -146,7 +127,7 @@ body, .btn, .project-card, #projectShowcase > div {
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
     text-decoration: none;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .btn:hover {
@@ -154,36 +135,10 @@ body, .btn, .project-card, #projectShowcase > div {
     color: var(--accent);
 }
 
-/* Fade-in animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-    animation: fadeIn 1s ease-out forwards;
-    opacity: 0;
-}
-
-.animation-delay-300 {
-    animation-delay: 300ms;
-}
-
-.animation-delay-600 {
-    animation-delay: 600ms;
-}
-
 #backToTop:hover {
     transform: translateY(-3px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .animate-fade-in {
-        animation: none;
-        opacity: 1;
-    }
-}
-
 #projectShowcase {
     transition: opacity 0.3s ease-in-out;
 }
@@ -195,83 +150,6 @@ body, .btn, .project-card, #projectShowcase > div {
 #projectShowcase > div {
     background-color: rgba(var(--bg-rgb), 0.8);
     backdrop-filter: blur(10px);
-    color: var(--text);
-    border: 1px solid var(--text-secondary);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.showcase-enter {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-.showcase-enter-active {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.3s, transform 0.3s;
-}
-
-.showcase-exit {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.showcase-exit-active {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.3s, transform 0.3s;
-}
-
-.tech-stack-label {
-    display: inline-block;
-    background-color: var(--accent);
-    color: var(--bg);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: bold;
-}
-
-/* Typing effect for hero section */
-.typing-effect::after {
-    content: '|';
-    animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* Responsive adjustments for project cards */
-@media (max-width: 1024px) {
-    .project-card {
-        width: calc(50% - 1rem);
-    }
-}
-
-@media (max-width: 640px) {
-    .project-card {
-        width: calc(100% - 1rem);
-    }
-}
-
-/* additional animations */
-
-#projectShowcase {
-    transition: opacity 0.3s ease-in-out;
-}
-
-#projectShowcase.active {
-    opacity: 1;
-}
-
-#projectShowcase > div {
-    background-color: rgba(var(--bg-rgb), 0.8);
-    backdrop-filter: blur(10px);
-    color: var(--text);
     border: 1px solid var(--text-secondary);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     opacity: 0;
@@ -290,8 +168,7 @@ body, .btn, .project-card, #projectShowcase > div {
     color: var(--bg);
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin: 0 0.5rem 0.5rem 0;
     font-size: 0.875rem;
     font-weight: bold;
     opacity: 0;
@@ -302,4 +179,52 @@ body, .btn, .project-card, #projectShowcase > div {
 #projectShowcase.active .tech-stack-label {
     opacity: 1;
     transform: translateY(0);
+}
+
+#showcaseVisitButton, #closeShowcase {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#showcaseVisitButton {
+    background-color: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+}
+
+#showcaseVisitButton:hover {
+    background-color: var(--text);
+    color: var(--accent);
+}
+
+#closeShowcase {
+    background-color: var(--text-secondary);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+}
+
+#closeShowcase:hover {
+    background-color: var(--text);
+    color: var(--bg);
+}
+
+@media (max-width: 768px) {
+    .shape {
+        transform: scale(0.7);
+    }
+}
+
+@media (max-width: 640px) {
+    .project-card {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-fade-in {
+        animation: none;
+        opacity: 1;
+    }
 }
