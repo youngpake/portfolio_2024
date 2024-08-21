@@ -1,0 +1,329 @@
+:root {
+    --light-bg: #f0f4f8;
+    --light-text: #333333;
+    --light-text-secondary: #666666;
+    --light-accent: #20b2aa;
+    --light-header: rgba(255, 255, 255, 0.9);
+    --light-footer: #e0e0e0;
+    
+    --dark-bg: #1a1a1a;
+    --dark-text: #ffffff;
+    --dark-text-secondary: #cccccc;
+    --dark-accent: #40e0d0;
+    --dark-header: rgba(26, 26, 26, 0.9);
+    --dark-footer: #2a2a2a;
+}
+
+.light {
+    --bg: var(--light-bg);
+    --text: var(--light-text);
+    --text-secondary: var(--light-text-secondary);
+    --accent: var(--light-accent);
+    --header: var(--light-header);
+    --footer: var(--light-footer);
+    --bg-rgb: 240, 244, 248;
+}
+
+.dark {
+    --bg: var(--dark-bg);
+    --text: var(--dark-text);
+    --text-secondary: var(--dark-text-secondary);
+    --accent: var(--dark-accent);
+    --header: var(--dark-header);
+    --footer: var(--dark-footer);
+    --bg-rgb: 26, 26, 26;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background animation styles */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, var(--bg), var(--accent));
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.2;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 86.6px solid var(--accent);
+}
+
+.square {
+    width: 50px;
+    height: 50px;
+    transform: rotate(45deg);
+}
+
+.shape:nth-child(1) { top: 10%; left: 10%; animation: float 20s infinite; }
+.shape:nth-child(2) { top: 20%; right: 20%; animation: float 25s infinite; }
+.shape:nth-child(3) { bottom: 15%; left: 30%; animation: float 22s infinite; }
+.shape:nth-child(4) { top: 30%; right: 30%; animation: float 28s infinite; }
+.shape:nth-child(5) { bottom: 20%; right: 10%; animation: float 24s infinite; }
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-20px, 20px) rotate(5deg); }
+    50% { transform: translate(20px, -20px) rotate(-5deg); }
+    75% { transform: translate(-20px, -20px) rotate(5deg); }
+}
+
+/* Depth layer */
+.depth-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .shape {
+        transform: scale(0.7);
+    }
+}
+
+.parallax-bg {
+    background-image: url('/api/placeholder/1920/1080');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Updated projects container and project card styles */
+.projects-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    -ms-overflow-style: none;
+    padding-bottom: 1rem;
+    gap: 1rem;
+}
+
+.projects-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.projects-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 4px;
+}
+
+.projects-container::-webkit-scrollbar-track {
+    background-color: var(--bg);
+}
+
+.project-card {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: calc(33.333% - 1rem);
+    min-width: 300px;
+    background-color: rgba(var(--bg-rgb), 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--text-secondary);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    will-change: transform;
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.project-card-front, .project-card-back {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.project-card-back {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.project-card:hover .project-card-front {
+    opacity: 0.7;
+}
+
+.project-card:hover .project-card-back {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.btn {
+    background-color: var(--accent);
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--text);
+    color: var(--accent);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+.animation-delay-300 {
+    animation-delay: 300ms;
+}
+
+.animation-delay-600 {
+    animation-delay: 600ms;
+}
+
+#backToTop {
+    transition: opacity 0.3s, transform 0.3s;
+    animation: float 3s ease-in-out infinite;
+}
+
+#backToTop:hover {
+    transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-fade-in {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+#projectShowcase {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#projectShowcase.active {
+    opacity: 1;
+}
+
+#projectShowcase > div {
+    background-color: rgba(var(--bg-rgb), 0.8);
+    backdrop-filter: blur(10px);
+    color: var(--text);
+    border: 1px solid var(--text-secondary);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.showcase-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.showcase-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.showcase-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.showcase-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.tech-stack-label {
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+/* Smooth transition for theme toggle */
+body, .btn, .project-card, #projectShowcase > div {
+    transition: all 0.5s ease-in-out;
+}
+
+/* Typing effect for hero section */
+.typing-effect::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Floating animation for the "Back to Top" button */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive adjustments for project cards */
+@media (max-width: 1024px) {
+    .project-card {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 640px) {
+    .project-card {
+        width: calc(100% - 1rem);
+    }
+}

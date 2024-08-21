@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wytse Punter - Backend Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text transition-colors duration-300">
+    <header class="fixed w-full z-50 bg-light-header dark:bg-dark-header">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">WP</h1>
+            <nav class="hidden md:flex space-x-4">
+                <a href="#projects" class="hover:text-light-accent dark:hover:text-dark-accent">Projects</a>
+                <a href="#about" class="hover:text-light-accent dark:hover:text-dark-accent">About</a>
+                <a href="#contact" class="hover:text-light-accent dark:hover:text-dark-accent">Contact</a>
+            </nav>
+            <button id="themeToggle" class="p-2 rounded-full bg-light-accent dark:bg-dark-accent">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="background-animation">
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="depth-layer"></div>
+    </div>
+
+    <main>
+        <section id="hero" class="parallax-bg min-h-screen flex items-center">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Wytse Punter</h2>
+                <p class="text-xl md:text-2xl mb-8 animate-fade-in animation-delay-600">Crafting efficient, scalable solutions</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#projects" class="btn animate-fade-in animation-delay-900">View Projects</a>
+                    <a href="#contact" class="btn btn-primary animate-fade-in animation-delay-900">Hire Me</a>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center">My Projects</h2>
+                <div class="projects-container">
+                    <div class="project-card" data-project="1">
+                        <img src="img/voyager.png" alt="Voyager Project" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Voyager</h3>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">An innovative solution for modern problems.</p>
+                            <button class="btn project-details-btn">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="2">
+                        <img src="img/risk_of_ruin.png" alt="Risk Of Ruin Project" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Risk Of Ruin</h3>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Revolutionizing the industry with cutting-edge technology.</p>
+                            <button class="btn project-details-btn">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="3">
+                        <img src="/img/cypher.png" alt="Cypher Project" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Cypher</h3>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Transforming user experiences through intuitive design.</p>
+                            <button class="btn project-details-btn">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="4">
+                        <img src="/img/bi-frost.png" alt="Bi-Frost AI" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Bi-Frost AI</h3>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Pushing the boundaries of quantum computing applications.</p>
+                            <button class="btn project-details-btn">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="projectShowcase" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <h2 id="showcaseTitle" class="text-3xl font-bold mb-4"></h2>
+            <div id="showcaseTechStack" class="mb-4"></div>
+            <p id="showcaseStory" class="mb-4"></p>
+            <p id="showcaseLearnings" class="mb-4"></p>
+            <button id="closeShowcase" class="btn">Close</button>
+        </div>
+    </div>
+
+    <footer class="bg-light-footer dark:bg-dark-footer text-light-text dark:text-dark-text py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; <script>document.write(new Date().getFullYear());</script> Wytse Punter. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" id="backToTop" class="fixed bottom-8 right-8 bg-light-accent dark:bg-dark-accent text-white p-2 rounded-full shadow-lg hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
