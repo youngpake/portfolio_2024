@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         4: {
             title: "Bi-Frost AI",
-            techStack: ["Python", "GPT", "Web Scraping", "Stripe API", "Data Regulations"],
+            techStack: ["Python", "Django", "GPT", "Web Scraping", "Stripe API", "Data Regulations"],
             story: "I created this project to explore how well GPT could analyze someone's entire online footprint and extract insights about their personality. The goal was to see if AI could form a comprehensive understanding of a person based on their digital presence. Development was smooth and enjoyable, making it a fun project to work on.",
             learnings: "This project taught me how to integrate Stripe for payments, which was a key learning objective. I also gained insights into AI's capabilities for personality analysis and improved my skills in handling and processing large amounts of online data.",
             url: "https://bi-frost.ai/"
