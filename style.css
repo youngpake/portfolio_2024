@@ -211,8 +211,62 @@ body, .btn, .project-card, #projectShowcase > div {
 }
 
 @media (max-width: 768px) {
-    .shape {
-        transform: scale(0.7);
+    #projectShowcase > div {
+        width: 90%;
+        max-height: 80vh;
+        margin: 10vh auto;
+        padding: 1rem;
+    }
+
+    #showcaseTitle {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #showcaseTechStack {
+        margin-bottom: 0.5rem;
+    }
+
+    .tech-stack-label {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem;
+        margin: 0 0.25rem 0.25rem 0;
+    }
+
+    #showcaseStory, #showcaseLearnings {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #showcaseVisitButton, #closeShowcase {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    #closeShowcase {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background-color: transparent;
+        color: var(--text);
+        font-size: 1.5rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #projectShowcase > div {
+        width: 95%;
+        max-height: 85vh;
+        margin: 7.5vh auto;
+    }
+
+    #showcaseTitle {
+        font-size: 1.3rem;
+    }
+
+    #showcaseStory, #showcaseLearnings {
+        font-size: 0.85rem;
     }
 }
 
@@ -227,4 +281,16 @@ body, .btn, .project-card, #projectShowcase > div {
         animation: none;
         opacity: 1;
     }
+}
+
+.tab-content {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.tab-btn {
+    transition: color 0.3s ease-in-out;
+}
+
+.tab-btn.active {
+    color: var(--color-accent);
 }

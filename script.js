@@ -1,7 +1,28 @@
+function initFeatherIcons() {
+    if (typeof feather !== 'undefined' && feather.replace) {
+        try {
+            feather.replace();
+        } catch (error) {
+            if (error instanceof TypeError && error.message.includes("Cannot read properties of undefined (reading 'toSvg')")) {
+                // Suppress this specific error
+                console.warn('Suppressed Feather icon error. This is expected and can be ignored.');
+            } else {
+                // Log other errors
+                console.error('Error initializing Feather icons:', error);
+            }
+        }
+    } else {
+        console.warn('Feather icons not loaded. Retrying in 100ms...');
+        setTimeout(initFeatherIcons, 100);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const elements = {
         themeToggle: document.getElementById('themeToggle'),
         backToTop: document.getElementById('backToTop'),
+        tabButtons: document.querySelectorAll('.tab-btn'),
+        tabContents: document.querySelectorAll('.tab-content'),
         projectCards: document.querySelectorAll('.project-card'),
         projectShowcase: document.getElementById('projectShowcase'),
         showcaseTitle: document.getElementById('showcaseTitle'),
@@ -10,30 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
         showcaseLearnings: document.getElementById('showcaseLearnings'),
         showcaseVisitButton: document.getElementById('showcaseVisitButton'),
         closeShowcase: document.getElementById('closeShowcase'),
-        heroTitle: document.querySelector('#hero h2'),
+        heroTitle: document.querySelector('#home h2'),
         backgroundAnimation: document.querySelector('.background-animation'),
-        projectsLinks: document.querySelectorAll('a[href="#projects"]'),
-        projectsSection: document.getElementById('projects'),
-        hireMeLinks: document.querySelectorAll('a[href="#hire-me"]'),
+        tabIndicator: document.getElementById('tabIndicator'),
     };
+
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     const projectDetails = {
         1: {
             title: "Voyager Dashboard",
             techStack: [
-                "Python",
-                "Django",
-                "Web Scrapers",
-                "PostgreSQL",
-                "Bootstrap",
-                "Highcharts.js",
-                "Azure Functions",
-                "Contabo VPS",
-                "Linux",
-                "GPT 3.5",
-                "Relational Databases",
-                "Data Regulations",
-                "JavaScript",
+                "Python", "Django", "Web Scrapers", "PostgreSQL", "Bootstrap",
+                "Highcharts.js", "Azure Functions", "Contabo VPS", "Linux",
+                "GPT 3.5", "Relational Databases", "Data Regulations", "JavaScript",
             ],
             story: "After mastering web scraping, I tried using GPT-3.5 to link market moves to news articles. The AI always found a link, even when there wasn't one, so I switched to analyzing overall market sentiment. I developed advanced scraping techniques to gather data from various websites, successfully scraping every site I encountered.",
             learnings: "As the project grew, I learned about designing larger systems to avoid slowing down. I explored different cloud platforms, starting with Azure, then a Contabo VPS for better resources at lower cost. However, unexpected data regulations made me switch to Heroku. This journey taught me about various hosting options and server configuration, while also improving my skills in building scalable systems.",
@@ -61,19 +72,55 @@ document.addEventListener('DOMContentLoaded', () => {
             url: "https://bi-frost.ai/"
         }
     };
-    elements.projectCards.forEach(card => {
-        card.addEventListener('click', () => {
-            showProjectDetails(card.dataset.project);
+
+    // Tab functionality
+    function showTab(tabName) {
+        elements.tabContents.forEach(content => {
+            content.classList.add('opacity-0');
+            setTimeout(() => content.classList.add('hidden'), 300);
+        });
+
+        elements.tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        const targetTab = document.getElementById(tabName);
+        if (targetTab) {
+            setTimeout(() => {
+                targetTab.classList.remove('hidden');
+                setTimeout(() => targetTab.classList.remove('opacity-0'), 50);
+            }, 300);
+
+            const activeButton = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+                updateTabIndicator(activeButton);
+            }
+        }
+    }
+
+    function updateTabIndicator(activeButton) {
+        const { offsetLeft, offsetWidth } = activeButton;
+        elements.tabIndicator.style.left = `${offsetLeft}px`;
+        elements.tabIndicator.style.width = `${offsetWidth}px`;
+    }
+
+    elements.tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            if (button.classList.contains('active')) {
+                // If the clicked tab is already active, show the home tab
+                showTab('home');
+            } else {
+                showTab(tabName);
+            }
         });
     });
 
-    function smoothScroll(target) {
-        target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
+    // Show home tab by default
+    showTab('home');
 
+    // Project details functionality
     function showProjectDetails(projectId) {
         const details = projectDetails[projectId];
     
@@ -93,11 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => elements.projectShowcase.classList.add('active'), 10);
     }
 
+    elements.projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            showProjectDetails(card.dataset.project);
+        });
+    });
+
     elements.closeShowcase.addEventListener('click', () => {
         elements.projectShowcase.classList.remove('active');
         setTimeout(() => elements.projectShowcase.classList.add('hidden'), 300);
     });
 
+    // Theme toggle functionality
     elements.themeToggle.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
@@ -111,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.add('dark');
     }
 
+    // Back to top functionality
     window.addEventListener('scroll', () => {
         elements.backToTop.classList.toggle('hidden', window.pageYOffset <= 300);
     });
@@ -120,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // Fade in projects on scroll
     function fadeInOnScroll() {
         elements.projectCards.forEach(card => {
             if (card.getBoundingClientRect().top < window.innerHeight * 0.8) {
@@ -131,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', fadeInOnScroll);
     fadeInOnScroll();
 
+    // Hero title typing effect
     const heroText = elements.heroTitle.textContent;
     elements.heroTitle.textContent = '';
     elements.heroTitle.classList.add('typing-effect');
@@ -144,8 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })();
 
+    // Background icon animation
     const icons = ['code', 'database', 'server', 'cpu', 'hard-drive', 'terminal'];
     
+    // Modify the createIcon function
     function createIcon() {
         const iconWrapper = document.createElement('div');
         iconWrapper.className = 'icon-wrapper';
@@ -163,7 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         iconWrapper.appendChild(icon);
         elements.backgroundAnimation.appendChild(iconWrapper);
-        feather.replace();
+        
+        initFeatherIcons();
 
         animateIcon(iconWrapper);
     }
@@ -188,12 +248,5 @@ document.addEventListener('DOMContentLoaded', () => {
         createIcon();
     }
 
-    if (elements.projectsLinks.length > 0 && elements.projectsSection) {
-        elements.projectsLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                smoothScroll(elements.projectsSection);
-            });
-        });
-    }
+    initFeatherIcons();
 });

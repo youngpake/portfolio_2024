@@ -60,13 +60,16 @@
     </script>
 </head>
 <body class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text transition-colors duration-300">
+
     <header class="fixed w-full z-50 bg-light-header dark:bg-dark-header">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold"><a href="/" title="Wytse Punter - Backend Developer">WP</a></h1>
-            <nav class="hidden md:flex space-x-4" aria-label="Main Navigation">
-                <a href="#projects" class="hover:text-light-accent dark:hover:text-dark-accent">Projects</a>
-                <a href="#about" class="hover:text-light-accent dark:hover:text-dark-accent">About</a>
-                <a href="https://www.linkedin.com/in/wytsepunter/" target="_blank" rel="noopener noreferrer" class="hover:text-light-accent dark:hover:text-dark-accent">Contact</a>
+            <nav class="flex space-x-4 relative" aria-label="Main Navigation">
+                <div id="tabIndicator" class="absolute bottom-0 h-1 bg-light-accent dark:bg-dark-accent transition-all duration-300 ease-in-out"></div>
+                <button class="tab-btn relative px-2 py-1" data-tab="home">Home</button>
+                <button class="tab-btn relative px-2 py-1" data-tab="projects">Projects</button>
+                <button class="tab-btn relative px-2 py-1" data-tab="about">About</button>
+                <a href="https://www.linkedin.com/in/wytsepunter/" target="_blank" rel="noopener noreferrer" class="hover:text-light-accent dark:hover:text-dark-accent px-2 py-1">Linkedin</a>
             </nav>
             <button id="themeToggle" class="p-2 rounded-full bg-light-accent dark:bg-dark-accent" aria-label="Toggle Theme">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,52 +79,53 @@
         </div>
     </header>
 
-    <div class="background-animation">
-        <div class="shape circle"></div>
-        <div class="shape triangle"></div>
-        <div class="shape square"></div>
-        <div class="shape circle"></div>
-        <div class="shape triangle"></div>
-        <div class="depth-layer"></div>
-    </div>
-
-    <main>
-        <section id="hero" class="parallax-bg min-h-screen flex items-center">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Wytse Punter</h2>
-                <p class="text-xl md:text-2xl mb-8 animate-fade-in animation-delay-600">Backend Developer & Software Engineer | Creating Efficient, Scalable Solutions</p>
-                <div class="flex justify-center space-x-4">
-                    <a href="#projects" id="viewProjectsButton" class="btn animate-fade-in animation-delay-900">View Projects</a>
-                    <a href="https://www.linkedin.com/in/wytsepunter/" target="_blank" rel="noopener noreferrer" class="btn btn-primary animate-fade-in animation-delay-900">Hire Me</a>
+    <main class="pt-16">
+        <div class="background-animation">
+            <div class="shape circle"></div>
+            <div class="shape triangle"></div>
+            <div class="shape square"></div>
+            <div class="shape circle"></div>
+            <div class="shape triangle"></div>
+            <div class="depth-layer"></div>
+        </div>
+        <section id="home" class="tab-content">
+            <div class="parallax-bg min-h-screen flex items-center">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Wytse Punter</h2>
+                    <p class="text-xl md:text-2xl mb-8 animate-fade-in animation-delay-600">Backend Developer & Software Engineer | Creating Efficient, Scalable Solutions</p>
+                    <div class="flex justify-center space-x-4">
+                        <button class="btn animate-fade-in animation-delay-900 tab-btn" data-tab="projects">View Projects</button>
+                        <a href="https://www.linkedin.com/in/wytsepunter/" target="_blank" rel="noopener noreferrer" class="btn btn-primary animate-fade-in animation-delay-900">Hire Me</a>
+                    </div>
                 </div>
             </div>
         </section>
-        
-        <section id="projects" class="py-16">
-            <div class="container mx-auto px-4">
+
+        <section id="projects" class="tab-content hidden">
+            <div class="container mx-auto px-4 py-16">
                 <h2 class="text-3xl font-bold mb-8 text-center">Highlighted Backend Development Projects</h2>
                 <div class="projects-container">
                     <article class="project-card" data-project="1">
                         <img src="img/voyager.png" alt="Voyager Project - Market Driver Analysis" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2">Voyager: Market Driver Analysis</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Innovative backend system for market driver detection using anomaly detection and GPT models.</p>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">A brave attempt to utilize GPT models for linking marketmoves and anomalies to news events</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </article>
                     <article class="project-card" data-project="2">
                         <img src="img/risk_of_ruin.png" alt="Risk Of Ruin - Financial Risk Calculator" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2">Risk Of Ruin: Financial Calculator</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">A robust backend for a critical financial risk assessment tool.</p>
+                            <h3 class="text-2xl font-bold mb-2">Risk Of Ruin: Simulator</h3>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">A simple yet crucial calculator for traders</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </article>
                     <article class="project-card" data-project="3">
                         <img src="/img/cypher.png" alt="Cypher - J. Powell Translator" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2">Cypher: J. Powell Translator</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Advanced NLP backend for decoding complex financial communications.</p>
+                            <h3 class="text-2xl font-bold mb-2">Cypher: FOMC Analyser</h3>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">J. Powell Translator</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </article>
@@ -129,31 +133,126 @@
                         <img src="/img/bi-frost.png" alt="Bi-Frost AI - AI Personality Reporting" class="w-full h-48 object-cover rounded-t-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2">Bi-Frost AI: Personality Analysis</h3>
-                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">Sophisticated backend system for AI-driven personality assessment and reporting.</p>
+                            <p class="text-light-text-secondary dark:text-dark-text-secondary mb-4">AI Personality Analysis</p>
                             <button class="btn project-details-btn">Learn More</button>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
+        <section id="about" class="tab-content hidden">
+            <div class="container mx-auto px-4 py-16">
+                <div class="bg-light-bg dark:bg-dark-bg p-8 rounded-xl shadow-2xl transition-all duration-300 hover:shadow-3xl">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <i data-feather="user" class="w-8 h-8 text-blue-500"></i>
+                                <h3 class="text-2xl font-semibold">Hello, I'm Wytse Punter</h3>
+                            </div>
+                            <p class="text-lg">A passionate backend and data engineer seeking remote opportunities to create cutting-edge solutions.</p>
+                            <div>
+                                <div class="flex items-center space-x-4 mb-4">
+                                    <i data-feather="zap" class="w-6 h-6 text-yellow-500"></i>
+                                    <h4 class="text-xl font-semibold">What Drives Me</h4>
+                                </div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center space-x-2">
+                                        <i data-feather="code" class="w-5 h-5 text-green-500"></i>
+                                        <span>Exploring new technologies</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i data-feather="cpu" class="w-5 h-5 text-purple-500"></i>
+                                        <span>Experimenting with AI</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i data-feather="layout" class="w-5 h-5 text-indigo-500"></i>
+                                        <span>Transforming ideas into web applications</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <i data-feather="settings" class="w-8 h-8 text-red-500"></i>
+                                <h3 class="text-2xl font-semibold">My Approach</h3>
+                            </div>
+                            <p class="text-lg">I offer end-to-end project management, handling every aspect from concept to launch:</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex items-center space-x-2">
+                                    <i data-feather="globe" class="w-5 h-5 text-blue-400"></i>
+                                    <span>Domain & SSL</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-feather="search" class="w-5 h-5 text-green-400"></i>
+                                    <span>SEO optimization</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-feather="database" class="w-5 h-5 text-yellow-400"></i>
+                                    <span>Database design</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-feather="layout" class="w-5 h-5 text-purple-400"></i>
+                                    <span>Frontend development</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-feather="server" class="w-5 h-5 text-red-400"></i>
+                                    <span>Backend development</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-feather="zap" class="w-5 h-5 text-orange-400"></i>
+                                    <span>Performance optimization</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-feather="bar-chart-2" class="w-5 h-5 text-indigo-400"></i>
+                                    <span>Analytics integration</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-12">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <i data-feather="brain" class="w-8 h-8 text-pink-500"></i>
+                            <h3 class="text-2xl font-semibold">INTJ Personality</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div class="bg-light-accent dark:bg-dark-accent p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                <i data-feather="trending-up" class="w-8 h-8 text-blue-500 mb-4"></i>
+                                <h4 class="text-xl font-semibold mb-2">Analytical Thinking</h4>
+                                <p>Approaching complex problems systematically</p>
+                            </div>
+                            <div class="bg-light-accent dark:bg-dark-accent p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                <i data-feather="bulb" class="w-8 h-8 text-yellow-500 mb-4"></i>
+                                <h4 class="text-xl font-semibold mb-2">Innovation</h4>
+                                <p>Connecting ideas for unique solutions</p>
+                            </div>
+                            <div class="bg-light-accent dark:bg-dark-accent p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                <i data-feather="target" class="w-8 h-8 text-green-500 mb-4"></i>
+                                <h4 class="text-xl font-semibold mb-2">Focus</h4>
+                                <p>Working independently towards long-term goals</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <div id="projectShowcase" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <h2 id="showcaseTitle" class="text-3xl font-bold mb-6"></h2>
             <div id="showcaseTechStack" class="mb-6 flex flex-wrap gap-2"></div>
             <p id="showcaseStory" class="mb-6"></p>
             <p id="showcaseLearnings" class="mb-6"></p>
             <div class="flex justify-between items-center">
-                <a id="showcaseVisitButton" href="#" target="_blank" rel="noopener noreferrer" class="inline-block">Visit Project</a>
-                <button id="closeShowcase">Close</button>
+                <a id="showcaseVisitButton" href="#" target="_blank" rel="noopener noreferrer" class="inline-block btn">Visit Project</a>
+                <button id="closeShowcase" class="btn">Close</button>
             </div>
         </div>
     </div>
 
     <footer class="bg-light-footer dark:bg-dark-footer text-light-text dark:text-dark-text py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; <script>document.write(new Date().getFullYear());</script> Wytse Punter. All rights reserved. | Backend Developer & Software Engineer</p>
+            <p>&copy; <span id="currentYear"></span> Wytse Punter. All rights reserved. | Backend Developer & Software Engineer</p>
         </div>
     </footer>
 
