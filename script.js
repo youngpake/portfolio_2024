@@ -5,7 +5,6 @@ function initFeatherIcons() {
         } catch (error) {
             if (error instanceof TypeError && error.message.includes("Cannot read properties of undefined (reading 'toSvg')")) {
                 // Suppress this specific error
-                console.warn('Suppressed Feather icon error. This is expected and can be ignored.');
             } else {
                 // Log other errors
                 console.error('Error initializing Feather icons:', error);
@@ -37,6 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Hero title typing effect
+    const heroText = elements.heroTitle.textContent;
+    elements.heroTitle.textContent = '';
+    elements.heroTitle.classList.add('typing-effect');
 
     const projectDetails = {
         1: {
@@ -186,11 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', fadeInOnScroll);
     fadeInOnScroll();
-
-    // Hero title typing effect
-    const heroText = elements.heroTitle.textContent;
-    elements.heroTitle.textContent = '';
-    elements.heroTitle.classList.add('typing-effect');
 
     (function typeWriter(index = 0) {
         if (index < heroText.length) {
