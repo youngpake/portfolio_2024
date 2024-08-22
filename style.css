@@ -294,3 +294,7 @@ body, .btn, .project-card, #projectShowcase > div {
 .tab-btn.active {
     color: var(--color-accent);
 }
+
+.min-h-screen {
+    min-height: 75vh !important;
+}
