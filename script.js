@@ -19,7 +19,6 @@ function initFeatherIcons() {
 document.addEventListener('DOMContentLoaded', () => {
     const elements = {
         themeToggle: document.getElementById('themeToggle'),
-        backToTop: document.getElementById('backToTop'),
         tabButtons: document.querySelectorAll('.tab-btn'),
         tabContents: document.querySelectorAll('.tab-content'),
         projectCards: document.querySelectorAll('.project-card'),
@@ -168,16 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isDarkMode) {
         document.documentElement.classList.add('dark');
     }
-
-    // Back to top functionality
-    window.addEventListener('scroll', () => {
-        elements.backToTop.classList.toggle('hidden', window.pageYOffset <= 300);
-    });
-
-    elements.backToTop.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
     // Fade in projects on scroll
     function fadeInOnScroll() {
