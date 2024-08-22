@@ -29,17 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         showcaseLearnings: document.getElementById('showcaseLearnings'),
         showcaseVisitButton: document.getElementById('showcaseVisitButton'),
         closeShowcase: document.getElementById('closeShowcase'),
-        heroTitle: document.querySelector('#home h2'),
         backgroundAnimation: document.querySelector('.background-animation'),
         tabIndicator: document.getElementById('tabIndicator'),
     };
 
     document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    // Hero title typing effect
-    const heroText = elements.heroTitle.textContent;
-    elements.heroTitle.textContent = '';
-    elements.heroTitle.classList.add('typing-effect');
 
     const projectDetails = {
         1: {
@@ -179,15 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', fadeInOnScroll);
     fadeInOnScroll();
-
-    (function typeWriter(index = 0) {
-        if (index < heroText.length) {
-            elements.heroTitle.textContent += heroText[index];
-            setTimeout(() => typeWriter(index + 1), 100);
-        } else {
-            elements.heroTitle.classList.remove('typing-effect');
-        }
-    })();
 
     // Background icon animation
     const icons = ['code', 'database', 'server', 'cpu', 'hard-drive', 'terminal'];
